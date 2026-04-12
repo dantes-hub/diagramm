@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  users     User[]
+  documents Document[]
+  processes Process[]
+}
+
+model User {
+  id             String        @id @default(cuid())
+  organizationId String
+  supabaseAuthId String?       @unique
+  email          String        @unique
+  role           String
+  createdAt      DateTime      @default(now())
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  created        Process[]     @relation("ProcessCreator")
+}
+
+model Document {
+  id             String       @id @default(cuid())
+  organizationId String
+  fileName       String
+  fileType       String
+  storageUrl     String?
+  extractedText  String
+  sourceFragments Json
+  uploadedAt     DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+model Process {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  description    String?
+  diagramKind    String
+  status         String
+  createdBy      String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  creator        User             @relation("ProcessCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+  versions       ProcessVersion[]
+}
+
+model ProcessVersion {
+  id                String   @id @default(cuid())
+  processId         String
+  versionNumber     Int
+  sourceDocumentIds Json
+  extractedJson     Json
+  diagramJson       Json
+  createdAt         DateTime @default(now())
+  process           Process  @relation(fields: [processId], references: [id], onDelete: Cascade)
+
+  @@unique([processId, versionNumber])
+}
