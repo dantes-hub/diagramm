@@ -17,7 +17,6 @@
     "db:generate": "prisma generate"
   },
   "dependencies": {
-    "@napi-rs/canvas": "^0.1.80",
     "@dagrejs/dagre": "^3.0.0",
     "@prisma/client": "^6.6.0",
     "@supabase/ssr": "^0.10.2",
@@ -29,14 +28,14 @@
     "lucide-react": "^0.511.0",
     "next": "^15.3.2",
     "openai": "^6.33.0",
-    "pdf-parse": "^2.4.5",
-    "pdfjs-dist": "^5.4.296",
+    "pdf-parse": "^1.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "zod": "^3.24.4"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
+    "@types/pdf-parse": "^1.1.5",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "autoprefixer": "^10.4.21",

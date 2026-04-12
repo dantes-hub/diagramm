@@ -114,15 +114,9 @@ export async function parseUploadedDocument(file: File): Promise<ParsedDocumentI
 }
 
 async function extractPdfText(buffer: Buffer) {
-  const { PDFParse } = await import("pdf-parse");
-  const parser = new PDFParse({ data: buffer });
-
-  try {
-    const result = await parser.getText();
-    return result.text;
-  } finally {
-    await parser.destroy();
-  }
+  const pdfParse = (await import("pdf-parse")).default;
+  const result = await pdfParse(buffer);
+  return result.text;
 }
 
 export function parsePastedDocument(documentName: string, rawText: string): ParsedDocumentInput {
