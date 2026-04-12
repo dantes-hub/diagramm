@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   typedRoutes: true,
-  serverExternalPackages: ["zod", "pdf-parse"],
+  serverExternalPackages: ["zod", "pdf-parse", "pdfjs-dist", "@napi-rs/canvas"],
 
   async headers() {
     return [

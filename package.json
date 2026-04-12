@@ -17,6 +17,7 @@
     "db:generate": "prisma generate"
   },
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.80",
     "@dagrejs/dagre": "^3.0.0",
     "@prisma/client": "^6.6.0",
     "@supabase/ssr": "^0.10.2",
@@ -29,6 +30,7 @@
     "next": "^15.3.2",
     "openai": "^6.33.0",
     "pdf-parse": "^2.4.5",
+    "pdfjs-dist": "^5.4.296",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "zod": "^3.24.4"
